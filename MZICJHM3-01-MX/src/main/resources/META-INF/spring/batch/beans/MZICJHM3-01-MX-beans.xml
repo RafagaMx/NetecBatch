@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- MZICJHM3-01-MX-beans.xml -->
+	
+	<!-- Set to the required transaction manager -->
+	<bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+	<bean class="org.springframework.batch.core.scope.StepScope" />
+	
+	<bean id="jobLauncher"  class="com.bbva.elara.batch.launcher.SimpleJobLauncherBean">
+		<property name="job" ref="MZICJHM3-01-MX" />
+		<property name="batchLauncher" ref="batchLauncher" />
+		<property name="defaultIncrementer" ref="defaultIncrementer" />		
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="SaludoJob1" class="com.bbva.mzic.batch.SaludoJob" scope="step">
+		<property name="message" value="#{jobParameters[rafa]}"></property>
+	</bean>
+	<bean id="SaludoJob2" class="com.bbva.mzic.batch.SaludoJob" scope="step">
+		<property name="message" value="#{jobParameters[rafa1]}"></property>
+	</bean>
+	<bean id="SaludoJob3" class="com.bbva.mzic.batch.SaludoJob" scope="step">
+		<property name="message" value="#{jobParameters[rafa2]}"></property>
+	</bean>
+	
+</beans>

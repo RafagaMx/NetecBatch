@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans" xmlns="http://www.springframework.org/schema/batch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+  <job id="MZICJHM3-01-MX" incrementer="defaultIncrementer" job-repository="jobRepository">
+  	<description>Poc 3 steps 3 beans</description>
+    <listeners>
+      <listener ref="interceptorJobExecutionListener"/>
+    </listeners>
+    <step id="Step1" next="Step2">
+    	<tasklet ref="SaludoJob1" />
+    </step>
+    <step id="Step2" next="Step3">
+    	<tasklet ref="SaludoJob2" />
+    </step>
+    <step id="Step3" >
+    	<tasklet ref="SaludoJob3" />
+    </step>
+  </job>
+</beans:beans>
