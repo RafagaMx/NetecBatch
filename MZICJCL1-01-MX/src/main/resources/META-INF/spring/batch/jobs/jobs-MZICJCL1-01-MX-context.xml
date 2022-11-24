@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans" xmlns="http://www.springframework.org/schema/batch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+  <job id="MZICJCL1-01-MX" incrementer="defaultIncrementer" job-repository="jobRepository">
+  	<description>Job con Chunk</description>
+    <listeners>
+      <listener ref="interceptorJobExecutionListener"/>
+    </listeners>
+    <step id="StepChunk">
+    	<tasklet>
+    	<chunk reader="Reader" processor="Processor" writer="Writer" commit-interval="2" />
+    	</tasklet>
+    </step>
+  </job>
+</beans:beans>

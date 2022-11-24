@@ -15,11 +15,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * Test for batch process MZICJHM3-01-MX
+ * Test for batch process MZICJCL1-01-MX
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:/META-INF/spring/batch/beans/MZICJHM3-01-MX-beans.xml","classpath:/META-INF/spring/batch/jobs/jobs-MZICJHM3-01-MX-context.xml","classpath:/META-INF/spring/jobs-MZICJHM3-01-MX-runner-context.xml"})
-public class MZICJHM301MXFunctionalTest{
+@ContextConfiguration(locations={"classpath:/META-INF/spring/batch/beans/MZICJCL1-01-MX-beans.xml","classpath:/META-INF/spring/batch/jobs/jobs-MZICJCL1-01-MX-context.xml","classpath:/META-INF/spring/jobs-MZICJCL1-01-MX-runner-context.xml"})
+public class MZICJCL101MXFunctionalTest{
 
 	@Autowired
 	private JobLauncherTestUtils jobLauncherTestUtils;
@@ -42,6 +42,6 @@ public class MZICJHM301MXFunctionalTest{
 //		final JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
 		
 		//TODO implements job launch test Assert's
-//		Assert.assertTrue(jobExecution.getExitStatus().equals(ExitStatus.COMPLETED));
+		Assert.assertTrue(jobExecution.getExitStatus().equals(ExitStatus.COMPLETED));
 	}
 }

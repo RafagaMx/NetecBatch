@@ -26,12 +26,16 @@ public class SaludoJob implements Tasklet {
 		LOGGER.info("setMessage() {} ", message);
 		this.message = message;
 	}
-
+	
 	@Override
-	public RepeatStatus execute(StepContribution arg0, ChunkContext arg1) {
-		LOGGER.info("execute() ");
-		return RepeatStatus.FINISHED;
-	}
+    public RepeatStatus  execute (StepContribution arg0, ChunkContext arg1) {
+        LOGGER.info ("execute(): {} ", this.message);
+        
+        if(this.message.contains("a")) {
+        	throw new IllegalArgumentException("Esto nunca sale a produccion");
+        }
+        return RepeatStatus.FINISHED;
+    }
 
 	@Override
 	public int hashCode() {
