@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- MZICJSO1-01-MX-beans.xml -->
+	
+	<!-- Set to the required transaction manager -->
+	<bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+	<bean class="org.springframework.batch.core.scope.StepScope" />
+	
+	<bean id="jobLauncher"  class="com.bbva.elara.batch.launcher.SimpleJobLauncherBean">
+		<property name="job" ref="MZICJSO1-01-MX" />
+		<property name="batchLauncher" ref="batchLauncher" />
+		<property name="defaultIncrementer" ref="defaultIncrementer" />		
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- APX Batch Course -->
+	
+	<bean id="sorttasklet" class="com.bbva.mzic.batch.MSTasklet" scope="step">
+		<property name="mySortOrMerge" ref="mySortOrMerge"/>
+	</bean>
+	
+	
+	<bean id="mySortOrMerge" class="com.bbva.elara.batch.utility.sort.merge.impl.SortAndMergeUtilityImpl">
+		 
+		<property name="options">
+			<list>
+				<value>UNIX_REVERSE</value>
+			</list>
+		</property>
+
+		<property name="resources">
+			<list value-type="java.lang.String">
+				<value>/ENTORNO_LOCAL_APX/fichtemcomp/datent/a1.txt</value>
+ 				<value>/ENTORNO_LOCAL_APX/fichtemcomp/datent/a2.txt</value> 
+ 				<value>/ENTORNO_LOCAL_APX/fichtemcomp/datent/a3.txt</value> 
+ 				<value>/ENTORNO_LOCAL_APX/fichtemcomp/datent/a4.txt</value> 
+			</list>
+		</property>
+
+		<property name="outputFile" value="/ENTORNO_LOCAL_APX/fichtemcomp/datsal/a1234Sort.txt" />
+
+	</bean>
+</beans>
